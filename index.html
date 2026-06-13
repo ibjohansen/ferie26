@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nedtelling til Italia!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: linear-gradient(135deg, #FFE066 0%, #FF6B9D 50%, #4ECDC4 100%);
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Nunito', sans-serif;
+  }
+  .header { text-align: center; margin-bottom: 28px; }
+  .header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    color: white;
+    text-shadow: 4px 4px 0px #FF6B9D, 6px 6px 0px rgba(0,0,0,0.2);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .header p { font-size: 1.3em; color: white; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+  .stars { font-size: 2em; letter-spacing: 8px; margin-bottom: 8px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .day-card {
+    border-radius: 20px;
+    padding: 12px 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: default;
+  }
+  .day-card:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.28); }
+  .day-card.today { border: 4px solid white; box-shadow: 0 0 0 4px #FFD700, 0 8px 20px rgba(0,0,0,0.3); }
+  .day-card.gone { opacity: 0.5; filter: grayscale(40%); }
+  .day-card.departure { border: 5px solid #FFD700; box-shadow: 0 0 0 5px #FF6B00, 0 12px 30px rgba(0,0,0,0.35); }
+  .date-label { font-size: 0.78em; font-weight: 900; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); text-transform: uppercase; letter-spacing: 0.5px; }
+  .illustration { font-size: 3.4em; line-height: 1; margin: 2px 0; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2)); }
+  .countdown-badge { background: white; border-radius: 50px; padding: 4px 10px; font-size: 0.85em; font-weight: 900; color: #333; box-shadow: 0 2px 8px rgba(0,0,0,0.2); white-space: nowrap; }
+  .countdown-badge.zero { background: #FFD700; color: #FF4500; font-size: 0.9em; animation: pulse 0.8s infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  .today-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: #FFD700; color: #333; font-size: 0.6em; font-weight: 900; padding: 3px 9px; border-radius: 20px; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px; }
+  .c0{background:linear-gradient(145deg,#FF6B6B,#FF4757)}.c1{background:linear-gradient(145deg,#FFA502,#FF7F50)}.c2{background:linear-gradient(145deg,#FFD700,#FFA500)}.c3{background:linear-gradient(145deg,#2ED573,#1E90FF)}.c4{background:linear-gradient(145deg,#1E90FF,#5352ED)}.c5{background:linear-gradient(145deg,#FF6B9D,#C44569)}.c6{background:linear-gradient(145deg,#26de81,#20bf6b)}.c7{background:linear-gradient(145deg,#45AAF2,#2980B9)}.c8{background:linear-gradient(145deg,#A29BFE,#6C5CE7)}.c9{background:linear-gradient(145deg,#FD9644,#E67E22)}.c10{background:linear-gradient(145deg,#FC5C65,#E84393)}.c11{background:linear-gradient(145deg,#4ECDC4,#2EBFC1)}.c12{background:linear-gradient(145deg,#F9CA24,#F0932B)}.c13{background:linear-gradient(145deg,#6AB04C,#2ECC71)}.c14{background:linear-gradient(145deg,#EB4D4B,#FF6B81)}.c15{background:linear-gradient(145deg,#7ED6DF,#22A6B3)}.c16{background:linear-gradient(145deg,#E056FD,#BE2EDD)}.c17{background:linear-gradient(145deg,#F39C12,#E67E22)}.c18{background:linear-gradient(145deg,#FF9FF3,#FF6B9D)}.c19{background:linear-gradient(145deg,#54A0FF,#2E86DE)}.c20{background:linear-gradient(145deg,#FF6B6B,#FFA502)}.c21{background:linear-gradient(145deg,#1DD1A1,#10AC84)}.c22{background:linear-gradient(145deg,#FFAA00,#FF6B00)}.c23{background:linear-gradient(145deg,#9B59B6,#8E44AD)}.c24{background:linear-gradient(145deg,#FF5252,#FF1744)}.c25{background:linear-gradient(145deg,#FFD700,#FF8C00)}
+  .footer { text-align: center; margin-top: 30px; font-size: 1.5em; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700; padding-bottom: 20px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="stars">&#11088; &#127775; &#11088;</div>
+  <h1>&#127470;&#127481; Italia Nedtelling! &#127470;&#127481;</h1>
+  <p>Sofie &amp; bestevenninnen reiser 8. juli! &#9992;&#65039;</p>
+</div>
+<div class="grid" id="calendar"></div>
+<div class="footer">&#127754; Sol, strand og spaghetti venter! &#127837;&#127774;</div>
+<script>
+const days=[
+  {date:"13. juni",daysLeft:25,emoji:"&#9728;&#65039;",colorClass:"c0"},
+  {date:"14. juni",daysLeft:24,emoji:"&#127958;&#65039;",colorClass:"c1"},
+  {date:"15. juni",daysLeft:23,emoji:"&#127846;",colorClass:"c2"},
+  {date:"16. juni",daysLeft:22,emoji:"&#127754;",colorClass:"c3"},
+  {date:"17. juni",daysLeft:21,emoji:"&#127940;",colorClass:"c4"},
+  {date:"18. juni",daysLeft:20,emoji:"&#129408;",colorClass:"c5"},
+  {date:"19. juni",daysLeft:19,emoji:"&#127796;",colorClass:"c6"},
+  {date:"20. juni",daysLeft:18,emoji:"&#128032;",colorClass:"c7"},
+  {date:"21. juni",daysLeft:17,emoji:"&#127817;",colorClass:"c8"},
+  {date:"22. juni",daysLeft:16,emoji:"&#9973;",colorClass:"c9"},
+  {date:"23. juni",daysLeft:15,emoji:"&#129335;",colorClass:"c10"},
+  {date:"24. juni",daysLeft:14,emoji:"&#128026;",colorClass:"c11"},
+  {date:"25. juni",daysLeft:13,emoji:"&#128374;&#65039;",colorClass:"c12"},
+  {date:"26. juni",daysLeft:12,emoji:"&#127802;",colorClass:"c13"},
+  {date:"27. juni",daysLeft:11,emoji:"&#127984;",colorClass:"c14"},
+  {date:"28. juni",daysLeft:10,emoji:"&#127992;",colorClass:"c15"},
+  {date:"29. juni",daysLeft:9,emoji:"&#127829;",colorClass:"c16"},
+  {date:"30. juni",daysLeft:8,emoji:"&#127749;",colorClass:"c17"},
+  {date:"1. juli",daysLeft:7,emoji:"&#128044;",colorClass:"c18"},
+  {date:"2. juli",daysLeft:6,emoji:"&#127837;",colorClass:"c19"},
+  {date:"3. juli",daysLeft:5,emoji:"&#127905;",colorClass:"c20"},
+  {date:"4. juli",daysLeft:4,emoji:"&#127800;",colorClass:"c21"},
+  {date:"5. juli",daysLeft:3,emoji:"&#127847;",colorClass:"c22"},
+  {date:"6. juli",daysLeft:2,emoji:"&#128506;&#65039;",colorClass:"c23"},
+  {date:"7. juli",daysLeft:1,emoji:"&#129523;",colorClass:"c24"},
+  {date:"8. juli",daysLeft:0,emoji:"&#9992;&#65039;",colorClass:"c25",departure:true}
+];
+const today=new Date();today.setHours(0,0,0,0);
+const startDate=new Date(2026,5,13);
+const cal=document.getElementById('calendar');
+days.forEach((d,i)=>{
+  const cardDate=new Date(startDate);cardDate.setDate(startDate.getDate()+i);
+  const isToday=cardDate.getTime()===today.getTime();
+  const isGone=cardDate<today;
+  const card=document.createElement('div');
+  card.className=['day-card',d.colorClass,isToday?'today':'',isGone?'gone':'',d.departure?'departure':''].filter(Boolean).join(' ');
+  let badge=d.daysLeft===0?'&#127881; VI REISER!':d.daysLeft===1?'1 dag igjen!':d.daysLeft+' dager';
+  card.innerHTML=(isToday?'<div class="today-badge">&#128073; I DAG!</div>':'')+
+    '<div class="date-label">'+d.date+'</div>'+
+    '<div class="illustration">'+d.emoji+'</div>'+
+    '<div class="countdown-badge'+(d.daysLeft===0?' zero':'')+'" >'+badge+'</div>';
+  cal.appendChild(card);
+});
+</script>
+</body>
+</html>
